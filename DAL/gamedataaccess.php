@@ -3,7 +3,7 @@ class GameDataAccess {
 
     private function getDatabase() {
         $con = new mysqli(
-            'localhost',
+            '127.0.0.1',
             'root',
             'root',
             'Gametracker',
