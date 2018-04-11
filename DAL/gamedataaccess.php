@@ -15,7 +15,9 @@ class GameDataAccess {
     public function getGames() {
         $db = $this->getDatabase();
 
-        $statement = 'SELECT ID, Title, Developer, Publisher, DATE_FORMAT(Release_Date, \'%Y-%m-%d\') as Release_Date, Twitter_Handle, Youtube_Id from Games';
+        $statement = 'SELECT Games.ID, Title, Developer, Publishers.Name as Publisher, DATE_FORMAT(Release_Date, \'%Y-%m-%d\') as Release_Date, Twitter_Handle, Youtube_Id 
+                      from Games
+                      join Publishers on PublisherID = Publishers.ID';
 
         $result = $db->query($statement);
 
@@ -33,7 +35,9 @@ class GameDataAccess {
     public function getGame($id) {
         $db = $this->getDatabase();
 
-        $statement = 'SELECT ID, Title, Developer, Publisher, DATE_FORMAT(Release_Date, \'%Y-%m-%d\') as Release_Date, Twitter_Handle, Youtube_Id from Games WHERE id = "'. $id .'"';
+        $statement = 'SELECT Games.ID, Title, Developer, Publishers.Name as Publisher, DATE_FORMAT(Release_Date, \'%Y-%m-%d\') as Release_Date, Twitter_Handle, Youtube_Id 
+                      from Games
+                      join Publishers on PublisherID = Publishers.ID WHERE Games.ID = "'. $id .'"';
 
         return $db->query($statement)->fetch_assoc();
     }

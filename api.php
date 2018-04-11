@@ -1,11 +1,19 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+use Slim\App;
 
 require 'vendor/autoload.php';
 require_once 'DLL/gamemanager.php';
 
-$app = new \Slim\App();
+$configuration = [
+    'settings' => [
+        'displayErrorDetails' => true,
+    ],
+];
+
+$c = new \Slim\Container($configuration);
+$app = new App($c);
 $gamemanager = new GameManager();
 
 $app->get("/", function (Request $request, Response $response) {
